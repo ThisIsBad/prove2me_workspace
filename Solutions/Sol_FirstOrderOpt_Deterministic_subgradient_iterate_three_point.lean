@@ -41,7 +41,7 @@ end FirstOrderOpt.Deterministic
 open FirstOrderOpt.Deterministic
 open scoped RealInnerProductSpace
 
-theorem solution : ¬ (∀ {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
+theorem solution : ¬ (∀ {E : Type} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
     (X : Set E) (xt xt1 gt : E) (γt : ℝ)
     (hxt1 : xt1 ∈ X)
     (hmin : ∀ x ∈ X, γt * ⟪gt, xt1⟫ + (1 / 2) * ‖xt1 - xt‖ ^ 2 ≤
@@ -50,6 +50,6 @@ theorem solution : ¬ (∀ {E : Type*} [NormedAddCommGroup E] [InnerProductSpace
       (1 / 2) * ‖x - xt‖ ^ 2 - (1 / 2) * ‖x - xt1‖ ^ 2) := by
   intro H
   exact aux_sitp_counterexample
-    (EuclideanSpace.single (⟨0⟩ : ULift (Fin 1)) (1 : ℝ))
+    (EuclideanSpace.single (0 : Fin 1) (1 : ℝ))
     (by rw [EuclideanSpace.norm_single]; norm_num)
     (fun X xt xt1 gt γt hxt1 hmin => H X xt xt1 gt γt hxt1 hmin)
