@@ -1,0 +1,16 @@
+import Mathlib
+
+open MeasureTheory
+
+namespace FoundationsML.ModelSelection
+
+/-- The generalization error (risk) of a hypothesis `h : X → Y` against a target concept
+`c : X → Y` and an underlying distribution `D` on `X` (Mohri, Rostamizadeh & Talwalkar,
+*Foundations of Machine Learning*, 2nd ed., MIT Press 2018, Definition 2.1, p. 11, PDF p. 28,
+restated locally for this chapter since drafts cannot import another chunk's draft module):
+`R(h) = P_{x∼D}[h(x) ≠ c(x)]`. -/
+noncomputable def GeneralizationError {X Y : Type*} [MeasurableSpace X]
+    (D : Measure X) (c h : X → Y) : ℝ :=
+  (D {x | h x ≠ c x}).toReal
+
+end FoundationsML.ModelSelection
