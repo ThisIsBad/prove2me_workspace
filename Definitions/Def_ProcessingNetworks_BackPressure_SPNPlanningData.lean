@@ -1,0 +1,35 @@
+import Mathlib
+
+namespace ProcessingNetworks.BackPressure
+
+/-- The static planning problem's model data, restated from mission II's `SPNPlanningData`
+(drafts in this series do not import one another): `I` buffers, `J` activities, `K` server pools,
+the material-requirement matrix `B`, expected-output matrix `Γ`, mean service times `m > 0`,
+capacity-consumption matrix `A`, server capacities `b > 0`. -/
+structure SPNPlanningData (I J K : ℕ) where
+  B : Matrix (Fin I) (Fin J) ℝ
+  Γ : Matrix (Fin I) (Fin J) ℝ
+  m : Fin J → ℝ
+  hm : ∀ j, 0 < m j
+  A : Matrix (Fin K) (Fin J) ℝ
+  b : Fin K → ℝ
+  hb : ∀ k, 0 < b k
+
+/-- Eq. (5.3)/(9.1): `R := (B - Γ)M⁻¹`, the input-output matrix. -/
+noncomputable def SPNPlanningData.R {I J K : ℕ} (dat : SPNPlanningData I J K) :
+    Matrix (Fin I) (Fin J) ℝ :=
+  (dat.B - dat.Γ) * Matrix.diagonal (fun j => (dat.m j)⁻¹)
+
+/-- Feasibility of the static planning problem (SPP) at level `γ` for arrival-rate vector `λ`,
+Eqs. (5.5)-(5.8), restated from mission II's `SPPFeasible`. -/
+def SPPFeasible {I J K : ℕ} (dat : SPNPlanningData I J K) (γ : ℝ) (lam : Fin I → ℝ)
+    (x : Fin J → ℝ) : Prop :=
+  dat.R.mulVec x = lam ∧ (∀ j, 0 ≤ x j) ∧ ∀ k, (dat.A.mulVec x) k ≤ γ * dat.b k
+
+/-- `γ*`, the optimal objective value of the SPP for arrival-rate vector `λ`, restated from
+mission II's `IsOptimalSPPValue`. -/
+def IsOptimalSPPValue {I J K : ℕ} (dat : SPNPlanningData I J K) (lam : Fin I → ℝ)
+    (γstar : ℝ) : Prop :=
+  IsLeast {γ : ℝ | ∃ x, SPPFeasible dat γ lam x} γstar
+
+end ProcessingNetworks.BackPressure
