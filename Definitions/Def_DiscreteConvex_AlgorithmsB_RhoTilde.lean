@@ -1,0 +1,14 @@
+import Mathlib
+import Definitions.Def_DiscreteConvex_AlgorithmsB_GammaSet
+
+namespace DiscreteConvex.AlgorithmsB
+
+open Classical
+open scoped Pointwise
+variable {V : Type*} [Fintype V] [DecidableEq V]
+/-- `ρ̃(Y) = ρ(Γ(Y)∪Z) - ρ(Z)`. -/
+def RhoTilde {U : Type*} [DecidableEq U] (rho : Finset V → ℤ) (Gamma : U → Finset V) (Z : Finset V)
+    (Y : Finset U) : ℤ :=
+  rho (GammaSet Gamma Y ∪ Z) - rho Z
+
+end DiscreteConvex.AlgorithmsB
