@@ -1,0 +1,13 @@
+import Mathlib
+import Definitions.Def_GilmoreGomoryTSP_MinCost_Model
+
+namespace GilmoreGomoryTSP.MinCost
+
+theorem theorem_1_ranking_optimal {n : ℕ}
+    (f g : ℝ → ℝ) (hf : MeasureTheory.LocallyIntegrable f) (hg : MeasureTheory.LocallyIntegrable g)
+    (hfg : ∀ x, 0 ≤ f x + g x) (A B : Fin (n + 1) → ℝ) (hB : Monotone B)
+    (φ : Equiv.Perm (Fin (n + 1))) (hφ : RanksA A φ) :
+    ∀ ψ : Equiv.Perm (Fin (n + 1)), cost f g A B φ ≤ cost f g A B ψ := by sorry
+
+end GilmoreGomoryTSP.MinCost
+
