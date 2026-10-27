@@ -1,0 +1,7 @@
+import Definitions.Def_PricingWithTips_NPHardness
+import Definitions.Def_PricingWithTips3DM_d3580fa66ff8cd5440556f0f
+
+namespace PricingWithTips
+theorem threeDM_np_hard : NPHardMarketPredicate ThreeDMYes :=
+  FixedShapeReductionTM2.threeDM_np_hard
+end PricingWithTips

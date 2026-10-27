@@ -1,0 +1,5 @@
+import Definitions.Def_PricingWithTips3DM_188c204bbb0abeaa041ddea5Part1Lemma2
+import Definitions.Def_PricingWithTips3DM_188c204bbb0abeaa041ddea5Part1Lemma3
+import Definitions.Def_PricingWithTips3DM_188c204bbb0abeaa041ddea5Part1Lemma4
+set_option autoImplicit true
+set_option backward.isDefEq.respectTransparency.types false

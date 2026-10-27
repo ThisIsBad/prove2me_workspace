@@ -1,0 +1,3 @@
+import Definitions.Def_PricingWithTips3DM_3a64b523d21161fe1251d130Part9
+set_option autoImplicit true
+set_option backward.isDefEq.respectTransparency.types false
